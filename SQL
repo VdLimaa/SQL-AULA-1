@@ -1,0 +1,71 @@
+-- DQL
+
+select * from Filmes;
+select * from Distribuidores;
+select nm_filme as 'Nome', aa_lancamento_filme as 'Ano'
+from Filmes
+order by nm_filme asc;
+
+select nm_filme as 'Nome', aa_lancamento_filme as 'Ano'
+from Filmes
+order by aa_lancamento_filme desc;
+
+select nm_filme as 'Nome', aa_lancamento_filme as 'Ano' from Filmes where aa_lancamento_filme > 2010
+order by nm_filme;
+
+select nm_filme as 'Nome', aa_lancamento_filme as 'Ano' from Filmes where aa_lancamento_filme between 2000 and 2005
+order by aa_lancamento_filme;
+
+select nm_filme as 'Nome', aa_lancamento_filme as 'Ano' from Filmes where aa_lancamento_filme = 2019 and cd_distribuidor = 7
+order by nm_filme;
+
+select nm_filme as 'Nome', cd_distribuidor as 'Distribuidor' from Filmes where cd_distribuidor <> 2
+order by nm_filme;
+
+select nm_filme as 'Nome', cd_distribuidor as 'Distribuidor' from Filmes where cd_distribuidor in (5,7,8)
+order by nm_filme;
+
+Select * from Filmes where cd_filme=4;
+
+Select * from Filmes where nm_filme like '%guerra%'
+order by nm_filme;
+
+Select nm_filme as 'Nome', aa_lancamento_filme as 'Ano', nm_distribuidor as 'Distribuidor'
+from Filmes as F, Distribuidores as D
+Where F.cd_distribuidor = D.cd_distribuidor
+order by nm_filme;
+
+Select nm_filme as 'Nome', aa_lancamento_filme as 'Ano', nm_distribuidor as 'Distribuidor'
+from Filmes F INNER JOIN Distribuidores D
+on F.cd_distribuidor = D.cd_distribuidor
+order by nm_filme;
+
+--Inserir Guardiões da Galáxia
+
+Insert into Filmes(nm_filme, aa_lancamento_filme, cd_distribuidor)
+values
+('Guardiões da Galáxia', 2014, 2)
+
+Insert into Filmes values ('Guardiões da Galáxia', 2014, 2);
+
+delete from Filmes where cd_filme=102;
+
+Insert into Filmes values ('Interestelar', 2014, 4);
+
+begin tran;
+
+select @@TRANCOUNT;
+
+update Filmes set nm_filme = 'Ih, Fu-fu';
+
+ROLLBACK TRANSACTION;
+
+--alterar China Filme Group para CFG Studio
+
+Update Distribuidores
+set nm_distribuidor = 'CFG'
+Where cd_distribuidor = 11;
+
+Select * from Distribuidores where cd_distribuidor = 11
+
+commit transaction;
